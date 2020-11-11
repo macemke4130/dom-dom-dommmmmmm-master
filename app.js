@@ -24,20 +24,24 @@ document.body.appendChild(btnDiv);
 const btn = document.createElement("button");
 const btnTxt = document.createTextNode("Add Square");
 btn.appendChild(btnTxt);
-btn.className = "flex-item btn btn-lg outline-primary";
+btn.className = "flex-item btn btn-lg btn-info";
 btnDiv.appendChild(btn); // Places <button> in btnDiv --
 
 let squareNum = 1;
 
 // Creates <main> for the Squares --
 let myMain = document.createElement("main");
-myMain.className = "container d-flex justify-content-start flex-wrap";
+myMain.className = "d-flex flex-wrap";
 document.body.appendChild(myMain);
 
 
 btn.addEventListener("click", function () {
+    addSquare();
+});
+
+function addSquare(){
     let newSquare = document.createElement("div");
-    newSquare.className = "mySquare";
+    newSquare.className = "mySquare d-flex justify-content-center align-items-center";
     newSquare.id = squareNum;
 
     myMain.appendChild(newSquare);
@@ -50,4 +54,12 @@ btn.addEventListener("click", function () {
     });
 
     squareNum++;
-});
+}
+
+
+
+
+// Add 50 squares for prototyping --
+for (let index = 0; index < 50; index++) {
+    addSquare();
+}
