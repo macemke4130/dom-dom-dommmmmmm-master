@@ -59,12 +59,20 @@ function addSquare() {
         let totalSquares = document.getElementsByClassName("mySquare");
         let lastSquare = totalSquares.length - 1;
         let lastCheck = totalSquares[lastSquare].id;
-        console.log(lastCheck);
 
-        let squareid = newSquare.id;
-        let toRemove = newSquare;
+        let firstCheck = totalSquares[0].id;
 
-        oddOrEven(squareid, lastCheck, toRemove);
+        let squareId = newSquare.id;
+        let kill = newSquare;
+
+        let a = squareId % 2;
+        if (a == 0) {
+            console.log("kill Even")
+            removeNextSquare(squareId, lastCheck, kill);
+        } else {
+            console.log("kill Odd")
+            removePreviousSquare(squareId, firstCheck, kill);
+        }
     });
 
     squareNum++;
@@ -77,30 +85,19 @@ function bgSwap() {
 
 let colors = ["red", "blue", "green", "yellow", "pink", "orange", "brown"];
 
-function oddOrEven(squareId, lastCheck, toRemove) {
-    let a = squareId % 2;
-    if (a == 0) {
-        removeNextSquare(squareId, lastCheck, toRemove);
-    } else {
-        //removePreviousSquare(x);
-    }
-}
-
-// Clean up these three function pass variables and I think the answer is in here! --
-function removeNextSquare(squareId, lastCheck, toRemove) {
-    if(squareId == lastCheck){
+function removeNextSquare(squareId, lastCheck, kill) {
+    if (squareId == lastCheck) {
         alert("This is the last Square. \nCan not remove next.");
     } else {
-        toRemove.remove();
+        kill.nextElementSibling.remove();
     }
 }
 
-function removePreviousSquare(x) {
-    if (x == 1) {
+function removePreviousSquare(squareId, firstCheck, kill) {
+    if (squareId == firstCheck){
         alert("This is the first Square. \nCan not remove previous.");
     } else {
-        let a = document.getElementById(x);
-        a.previousElementSibling.remove();
+        kill.previousElementSibling.remove();
     }
 }
 
