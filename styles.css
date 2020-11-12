@@ -1,13 +1,15 @@
 .mySquare {
+    user-select: none;
     height: 100px;
     width: 100px;
     background-color: black;
-    border: solid red 1px;
+    border: dashed white 1px;
     
     font-family: monospace, sans-serif;
     font-size: 4rem;
     margin: auto 0;
     color: white;
+    text-shadow: 2px 2px 0px black;
 
 }
 button {

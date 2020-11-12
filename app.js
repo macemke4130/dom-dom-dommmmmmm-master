@@ -39,27 +39,72 @@ btn.addEventListener("click", function () {
     addSquare();
 });
 
-function addSquare(){
+function addSquare() {
     let newSquare = document.createElement("div");
     newSquare.className = "mySquare d-flex justify-content-center align-items-center";
     newSquare.id = squareNum;
 
     myMain.appendChild(newSquare);
 
-    newSquare.addEventListener("mouseover", function(){
+    newSquare.addEventListener("mouseover", function () {
         newSquare.textContent = newSquare.id;
     });
-    newSquare.addEventListener("mouseout", function(){
+    newSquare.addEventListener("mouseout", function () {
         newSquare.textContent = "";
+    });
+    newSquare.addEventListener("click", function () {
+        newSquare.style.background = bgSwap();
+    });
+    newSquare.addEventListener("dblclick", function () {
+        let totalSquares = document.getElementsByClassName("mySquare");
+        let lastSquare = totalSquares.length - 1;
+        let lastCheck = totalSquares[lastSquare].id;
+        console.log(lastCheck);
+
+        let squareid = newSquare.id;
+        let toRemove = newSquare;
+
+        oddOrEven(squareid, lastCheck, toRemove);
     });
 
     squareNum++;
 }
 
+function bgSwap() {
+    let a = Math.floor(Math.random() * colors.length); // Random number between 0 and 8 --
+    return colors[a];
+}
 
+let colors = ["red", "blue", "green", "yellow", "pink", "orange", "brown"];
 
+function oddOrEven(squareId, lastCheck, toRemove) {
+    let a = squareId % 2;
+    if (a == 0) {
+        removeNextSquare(squareId, lastCheck, toRemove);
+    } else {
+        //removePreviousSquare(x);
+    }
+}
 
-// Add 50 squares for prototyping --
-for (let index = 0; index < 50; index++) {
+// Clean up these three function pass variables and I think the answer is in here! --
+function removeNextSquare(squareId, lastCheck, toRemove) {
+    if(squareId == lastCheck){
+        alert("This is the last Square. \nCan not remove next.");
+    } else {
+        toRemove.remove();
+    }
+}
+
+function removePreviousSquare(x) {
+    if (x == 1) {
+        alert("This is the first Square. \nCan not remove previous.");
+    } else {
+        let a = document.getElementById(x);
+        a.previousElementSibling.remove();
+    }
+}
+
+// Add 10 squares for prototyping --
+for (let index = 0; index < 10; index++) {
     addSquare();
 }
